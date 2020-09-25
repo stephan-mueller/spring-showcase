@@ -26,21 +26,21 @@
 
         <timestamp>${maven.build.timestamp}</timestamp>
 
-        <version.spring-boot-admin>2.2.4</version.spring-boot-admin>
-        <version.springdoc-openapi>1.4.3</version.springdoc-openapi>
+        <version.spring-boot-admin>2.3.0</version.spring-boot-admin>
+        <version.springdoc-openapi>1.4.7</version.springdoc-openapi>
 
-        <version.apache_commons-lang>3.10</version.apache_commons-lang>
+        <version.apache_commons-lang>3.11</version.apache_commons-lang>
 
         <version.slf4j>1.7.30</version.slf4j>
 
-        <version.assertj>3.16.1</version.assertj>
-        <version.mockito>3.3.3</version.mockito>
+        <version.assertj>3.17.2</version.assertj>
+        <version.mockito>3.5.11</version.mockito>
 
         <version.testcontainers>1.14.3</version.testcontainers>
-        <version.cucumber>6.2.0</version.cucumber>
+        <version.cucumber>6.7.0</version.cucumber>
         <version.rest-assured>4.2.0</version.rest-assured>
 
-        <version.jacoco>0.8.5</version.jacoco>
+        <version.jacoco>0.8.6</version.jacoco>
 
         <sonar.projectKey>stephan-mueller_spring-showcase</sonar.projectKey>
         <sonar.organization>stephan-mueller</sonar.organization>

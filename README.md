@@ -359,3 +359,50 @@ class GreetingPostmanIT extends AbstractIntegrationTest {
   }
 }
 ```
+
+## Deployment in SAP Business Technology Platform (BTP) Cloud Foundry
+BTP is a platform-as-a-service by SAP, offering services for developing and integrating custom applications with SAP
+systems and deploying them in different cloud-native environments. This application includes configuration for deploying it
+in the [Cloud Foundry](https://help.sap.com/docs/btp/sap-business-technology-platform/cloud-foundry-environment) environment.
+It makes deploying a single fat JAR simple without worrying about infrastructure details.
+
+### Optional: BTP Trial
+If you don't have access to an existing BTP account, you can get a trial account for 90 days: https://www.sap.com/products/technology-platform/trial.html
+
+When the trial account is ready, log in to the BTP Cockpit and make sure that the Cloud Foundry environment is enabled.
+
+### How to deploy
+First install the Cloud Foundry CLI, see the [installation guide](https://github.com/cloudfoundry/cli/wiki/V8-CLI-Installation-Guide).
+
+Lookup the CF API endpoint in BTP Cockpit and configure the CLI to use it, with a trial account it's probably the US endpoint:
+```shell script
+$ cf api https://api.cf.us10-001.hana.ondemand.com
+```
+
+Login with CF CLI:
+```shell script
+$ cf login --sso
+```
+
+Package the application into a fat JAR. Use the `btp` maven-profile to skip the docker build:
+```shell script
+$ mvn clean package -P btp
+```
+
+Push the application:
+```shell script
+$ cf push
+```
+This command uses the `manifest.yml` to create the service accordingly in Cloud Foundry and pushes the JAR.
+If it's successful, the command will output the URL of the running application.
+
+### Details on the configuration
+
+The [manifest.yml](manifest.yml) describes how the application should be deployed in Cloud Foundry. 
+It points to the packaged JAR and enables the `sap_java_buildpack`, which prepares the application for the environment and injects some agents for monitoring.
+You can also configure static routes and environment variables like the active spring profile.
+
+The [application-btp.properties](src/main/resources/application-btp.properties) is used for Spring configuration in the BTP environment.
+It configures the service URL of the Spring Boot Admin client instance using the `${vcap.application.uris[0]}` property. 
+This property is set automatically by the Spring Boot class `CloudFoundryVcapEnvironmentPostProcessor` by reading the `VCAP_APPLICATION` environment variable,
+which is set by Cloud Foundry on startup and contains details on the application like the public URL.

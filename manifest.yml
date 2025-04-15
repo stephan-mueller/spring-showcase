@@ -1,0 +1,13 @@
+---
+applications:
+
+  - name: spring-showcase
+    memory: 1500M
+    timeout: 300
+    random-route: true
+    path: target/spring-showcase.jar
+    buildpacks:
+      - sap_java_buildpack
+    env:
+      SPRING_PROFILES_ACTIVE: 'btp'
+      JBP_CONFIG_COMPONENTS: '{ "jres": ["com.sap.xs.java.buildpack.jre.SAPMachineJRE"] }'

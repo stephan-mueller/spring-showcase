@@ -29,7 +29,7 @@
         <version.spring-boot-admin>2.3.0</version.spring-boot-admin>
         <version.springdoc-openapi>1.4.7</version.springdoc-openapi>
 
-        <version.apache_commons-lang>3.11</version.apache_commons-lang>
+        <version.apache_commons-lang>3.18.0</version.apache_commons-lang>
 
         <version.slf4j>1.7.30</version.slf4j>
 
